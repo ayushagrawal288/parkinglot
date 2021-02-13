@@ -7,8 +7,8 @@ from query import Query
 class ReadInput(object):
     parking_lot: ParkingLot
 
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filepath):
+        self.filename = filepath
 
     def process(self):
         with open(self.filename) as file_in:
@@ -17,7 +17,6 @@ class ReadInput(object):
 
     def command(self, cmd: str):
         command = cmd.lower().split(" ")
-        # print(command)
         if command[0] == CREATE_PARKING_LOT:
             self.create_lot(command[1:])
         elif command[0] == PARK_CAR:
@@ -111,6 +110,5 @@ class ReadInput(object):
 
 
 if __name__ == '__main__':
-
     filename = input()
     ReadInput(filename).process()
