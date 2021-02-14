@@ -16,6 +16,10 @@ null
 null
 Slot already vacant
 null
+Car with vehicle registration number "HR-29-TG-2098" has been parked at slot number 4
+Car with vehicle registration number "HR-29-TG-3198" has been parked at slot number 5
+Car with vehicle registration number "HR-29-TG-3298" has been parked at slot number 6
+Parking lot is full
 '''
 
     captured_output = io.StringIO()  # Create StringIO object

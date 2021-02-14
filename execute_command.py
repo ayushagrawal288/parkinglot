@@ -55,10 +55,13 @@ class ReadInput(object):
         reg_no = args[0]
         age = int(args[2])
         vehicle = Car(reg_no)
-        spot = self.parking_lot.occupy_spot(vehicle, age)
-        print(
-            'Car with vehicle registration number "' + reg_no.upper() + '" has been parked at slot number ' + str(
-                spot.spot_id))
+        try:
+            spot = self.parking_lot.occupy_spot(vehicle, age)
+            print(
+                'Car with vehicle registration number "' + reg_no.upper() + '" has been parked at slot number ' + str(
+                    spot.spot_id))
+        except RuntimeError as e:
+            print(e.__str__())
 
     def leave(self, args):
         self.check_parking_lot()

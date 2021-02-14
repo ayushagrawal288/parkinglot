@@ -30,6 +30,8 @@ class ParkingLot(object):
         bisect.insort(self.free_spot_ids, spot_id)
 
     def occupy_spot(self, vehicle: Vehicle, driver_age: int):
+        if self.cur_occupied == self.capacity:
+            raise RuntimeError("Parking lot is full")
         ticket = Ticket(vehicle, driver_age)
         spot_id = self._get_spot_id()
         spot = ParkingSpot(spot_id)
@@ -38,14 +40,16 @@ class ParkingLot(object):
         except RuntimeError as e:
             return self.occupy_spot(vehicle, driver_age)
         self.spots[spot_id] = spot
+        self.cur_occupied += 1
         return spot
 
-    def empty_spot(self, spot_it):
-        spot: ParkingSpot = self.spots.pop(spot_it, None)
+    def empty_spot(self, spot_id):
+        spot: ParkingSpot = self.spots.pop(spot_id, None)
         if spot is None:
             return None
         spot.leave()
         self._free_spot_id(spot.spot_id)
+        self.cur_occupied -= 1
         return spot
 
     def get_all_occupied_spots(self):
